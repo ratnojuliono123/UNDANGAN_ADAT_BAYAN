@@ -1,0 +1,1679 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Acara Mulud Adat Desa Bayan</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta content="Free HTML Templates" name="keywords" />
+    <meta content="Free HTML Templates" name="description" />
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon" />
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Font Awesome -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet" />
+    <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet" />
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/style.css" rel="stylesheet" />
+  </head>
+
+  <body data-spy="scroll" data-target=".navbar" data-offset="51">
+    <!-- Navbar Start -->
+
+    <!-- Navbar with Music Player Button -->
+    <nav
+      class="navbar fixed-top shadow-sm navbar-expand-lg bg-dark navbar-dark py-3 py-lg-0 px-lg-5"
+    >
+      <a href="index.html" class="navbar-brand d-block d-lg-none">
+        <h1 class="font-secondary text-white mb-n2">
+          Mulud <span class="text-primary">-</span>Adat
+        </h1>
+      </a>
+      <button
+        type="button"
+        class="navbar-toggler"
+        data-toggle="collapse"
+        data-target="#navbarCollapse"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div
+        class="collapse navbar-collapse justify-content-between"
+        id="navbarCollapse"
+      >
+        <div class="navbar-nav ml-auto py-0">
+          <a href="#home" class="nav-item nav-link active">Home</a>
+          <a href="#about" class="nav-item nav-link">About</a>
+          <a href="#story" class="nav-item nav-link">Story</a>
+          <a href="#gallery" class="nav-item nav-link">Gallery</a>
+        </div>
+        <a href="index.html" class="navbar-brand mx-5 d-none d-lg-block">
+          <h1 class="font-secondary text-white mb-n2">
+            Mulud <span class="text-primary">-</span> Adat
+          </h1>
+        </a>
+        <div class="navbar-nav mr-auto py-0">
+          <a href="#event" class="nav-item nav-link">Event</a>
+          <a href="#contact" class="nav-item nav-link">Contact</a>
+        </div>
+        <!-- Floating Music Player Button -->
+        <button id="music-player-btn" class="btn music-player-btn">
+          <i class="fa fa-music"></i>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Floating Music Player Popup -->
+    <div id="music-player-popup" class="music-player-popup">
+      <audio
+        id="background-music"
+        src="audio/Amtenar - Stay With Your Love.mp3"
+      ></audio>
+      <div class="player-container">
+        <div class="player-controls d-flex align-items-center">
+          <button id="play-pause-btn" class="btn play-pause-btn">
+            <i class="fa fa-play"></i>
+          </button>
+          <div class="progress-container">
+            <div class="progress-bar" id="music-progress"></div>
+          </div>
+          <div class="time-display">
+            <span id="current-time">0:00</span> /
+            <span id="duration">0:00</span>
+          </div>
+        </div>
+        <div class="volume-control">
+          <input
+            type="range"
+            id="volume-slider"
+            min="0"
+            max="1"
+            step="0.01"
+            value="1"
+          />
+        </div>
+      </div>
+    </div>
+
+    <!-- Include Font Awesome for icons -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- CSS for Cassette Design and Animation -->
+    <style>
+      .music-player-popup {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        width: 250px;
+        height: 120px;
+        background: linear-gradient(135deg, #6a11cb, #2575fc);
+        border-radius: 25px;
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+        display: none;
+        animation: popupAnimation 0.5s ease-out;
+        padding: 10px;
+        color: white;
+      }
+
+      @keyframes popupAnimation {
+        0% {
+          transform: scale(0);
+          opacity: 0;
+        }
+        100% {
+          transform: scale(1);
+          opacity: 1;
+        }
+      }
+
+      .player-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 100%;
+      }
+
+      .player-controls {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+      }
+
+      .play-pause-btn {
+        background: #fff;
+        color: #6a11cb;
+        border-radius: 50%;
+        width: 60px;
+        height: 60px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1.5em;
+        transition: all 0.3s;
+        border: none;
+        cursor: pointer;
+      }
+
+      .play-pause-btn:hover {
+        background: #2575fc;
+        color: #fff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      }
+
+      .progress-container {
+        position: relative;
+        background: rgba(255, 255, 255, 0.3);
+        height: 8px;
+        width: 100px;
+        border-radius: 5px;
+        overflow: hidden;
+        margin: 0 10px;
+      }
+
+      .progress-bar {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        background: #fff;
+        width: 0%;
+        transition: width 0.1s ease;
+      }
+
+      .time-display {
+        font-size: 14px;
+        margin-left: 10px;
+      }
+
+      .volume-control {
+        margin-top: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .volume-control input {
+        width: 100px;
+        margin-left: 10px;
+      }
+
+      /* Button to open music player */
+      .music-player-btn {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background-color: #2575fc;
+        color: white;
+        border-radius: 50%;
+        padding: 10px;
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+        font-size: 2em;
+        cursor: pointer;
+        border: none;
+      }
+    </style>
+
+    <!-- JavaScript for Play/Pause and Draggable Functionality -->
+    <script>
+      // Music player elements
+      const audio = document.getElementById("background-music");
+      const playPauseBtn = document.getElementById("play-pause-btn");
+      const musicPlayerPopup = document.getElementById("music-player-popup");
+      const musicPlayerBtn = document.getElementById("music-player-btn");
+      const progressBar = document.getElementById("music-progress");
+      const currentTimeDisplay = document.getElementById("current-time");
+      const durationDisplay = document.getElementById("duration");
+      const volumeSlider = document.getElementById("volume-slider");
+
+      // Play/Pause Button functionality
+      playPauseBtn.addEventListener("click", () => {
+        if (audio.paused) {
+          audio.play();
+          playPauseBtn.innerHTML = '<i class="fa fa-pause"></i>';
+        } else {
+          audio.pause();
+          playPauseBtn.innerHTML = '<i class="fa fa-play"></i>';
+        }
+      });
+
+      // Update progress bar and time display
+      audio.addEventListener("timeupdate", () => {
+        const progress = (audio.currentTime / audio.duration) * 100;
+        progressBar.style.width = progress + "%";
+        currentTimeDisplay.textContent = formatTime(audio.currentTime);
+      });
+
+      // Set duration on metadata load
+      audio.addEventListener("loadedmetadata", () => {
+        durationDisplay.textContent = formatTime(audio.duration);
+      });
+
+      // Volume control
+      volumeSlider.addEventListener("input", () => {
+        audio.volume = volumeSlider.value;
+      });
+
+      // Format time to mm:ss
+      function formatTime(seconds) {
+        const minutes = Math.floor(seconds / 60);
+        const remainingSeconds = Math.floor(seconds % 60);
+        return `${minutes}:${
+          remainingSeconds < 10 ? "0" : ""
+        }${remainingSeconds}`;
+      }
+
+      // Show the music player on button click
+      musicPlayerBtn.addEventListener("click", () => {
+        musicPlayerPopup.style.display = "block";
+      });
+
+      // Draggable functionality
+      let isDragging = false;
+      let offsetX, offsetY;
+
+      musicPlayerPopup.addEventListener("mousedown", (e) => {
+        isDragging = true;
+        offsetX = e.clientX - musicPlayerPopup.getBoundingClientRect().left;
+        offsetY = e.clientY - musicPlayerPopup.getBoundingClientRect().top;
+        document.body.style.cursor = "move";
+      });
+
+      document.addEventListener("mousemove", (e) => {
+        if (isDragging) {
+          musicPlayerPopup.style.left = e.clientX - offsetX + "px";
+          musicPlayerPopup.style.top = e.clientY - offsetY + "px";
+        }
+      });
+
+      document.addEventListener("mouseup", () => {
+        isDragging = false;
+        document.body.style.cursor = "default";
+      });
+    </script>
+
+    <!-- Navbar End -->
+
+    <!-- Carousel Start -->
+    <div class="container-fluid p-0 mb-5 pb-5" id="home">
+      <div
+        id="header-carousel"
+        class="carousel slide carousel-fade"
+        data-ride="carousel"
+      >
+        <div class="carousel-inner">
+          <div
+            class="carousel-item position-relative active"
+            style="height: 100vh; min-height: 400px"
+          >
+            <img
+              class="position-absolute w-100 h-100"
+              src="img/1.jpg"
+              style="object-fit: cover"
+            />
+            <div
+              class="carousel-caption d-flex flex-column align-items-center justify-content-center"
+            >
+              <div class="p-3" style="max-width: 900px">
+                <h1 class="display-1 font-secondary text-white mt-n3 mb-md-4">
+                  Mulud Adat Desa Bayan
+                </h1>
+                <div
+                  class="d-inline-block border-top border-bottom border-light py-3 px-4"
+                >
+                  <h3
+                    class="text-uppercase font-weight-normal text-white m-0"
+                    style="letter-spacing: 2px"
+                  >
+                    Undangan Online Untuk Seluruh Warga Desa Bayan
+                  </h3>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="carousel-item position-relative"
+            style="height: 100vh; min-height: 400px"
+          >
+            <img
+              class="position-absolute w-100 h-100"
+              src="img/2.jpg"
+              style="object-fit: cover"
+            />
+            <div
+              class="carousel-caption d-flex flex-column align-items-center justify-content-center"
+            >
+              <div class="p-3" style="max-width: 900px">
+                <h1 class="display-1 font-secondary text-white mt-n3 mb-md-4">
+                  Muludd Adat Desa Bayan
+                </h1>
+                <div
+                  class="d-inline-block border-top border-bottom border-light py-3 px-4"
+                >
+                  <h3
+                    class="text-uppercase font-weight-normal text-white m-0"
+                    style="letter-spacing: 2px"
+                  >
+                    Undangan Online Untuk Seluruh Warga Desa BayaN
+                  </h3>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <a
+          class="carousel-control-prev justify-content-start"
+          href="#header-carousel"
+          data-slide="prev"
+        >
+          <div class="btn btn-primary px-0" style="width: 68px; height: 68px">
+            <span class="carousel-control-prev-icon mt-3"></span>
+          </div>
+        </a>
+        <a
+          class="carousel-control-next justify-content-end"
+          href="#header-carousel"
+          data-slide="next"
+        >
+          <div class="btn btn-primary px-0" style="width: 68px; height: 68px">
+            <span class="carousel-control-next-icon mt-3"></span>
+          </div>
+        </a>
+      </div>
+    </div>
+    <!-- Carousel End -->
+
+    <!-- About Start -->
+    <!-- About Section -->
+    <div class="container-fluid py-5" id="about">
+      <div class="container py-5">
+        <div class="section-title position-relative text-center mb-5">
+          <h6
+            class="text-uppercase text-primary mb-3"
+            style="letter-spacing: 3px; animation: fadeIn 2s"
+          >
+            About
+          </h6>
+          <h1
+            class="font-secondary display-4 mb-4"
+            style="animation: fadeIn 3s"
+          >
+            Cerita tentang mulud adat di desa bayan
+          </h1>
+          <i
+            class="far fa-heart text-dark"
+            style="animation: heartBeat 1.5s infinite"
+          ></i>
+        </div>
+
+        <div class="row justify-content-center">
+          <div class="col-md-12">
+            <div class="about-video-container position-relative">
+              <!-- Photo & Video Section -->
+              <div class="about-image-container">
+                <img
+                  class="position-absolute w-100 h-100"
+                  src="img/1.jpg"
+                  style="
+                    object-fit: cover;
+                    border-radius: 15px;
+                    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+                    animation: zoomIn 3s;
+                  "
+                  alt="Groom & Bride Image"
+                />
+                <div
+                  class="video-overlay d-flex justify-content-center align-items-center"
+                >
+                  <button
+                    class="play-video-btn"
+                    data-toggle="modal"
+                    data-target="#videoModal"
+                    style="
+                      border: none;
+                      background: transparent;
+                      cursor: pointer;
+                      animation: bounceIn 2s;
+                    "
+                  >
+                    <i
+                      class="fas fa-play-circle text-white"
+                      style="font-size: 70px"
+                    ></i>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Video Modal for Play -->
+              <div
+                class="modal fade"
+                id="videoModal"
+                tabindex="-1"
+                role="dialog"
+                aria-labelledby="videoModalLabel"
+                aria-hidden="true"
+              >
+                <div
+                  class="modal-dialog modal-dialog-centered modal-lg"
+                  role="document"
+                >
+                  <div class="modal-content">
+                    <div
+                      class="modal-header"
+                      style="
+                        background: linear-gradient(to right, #15012b, #011639);
+                      "
+                    >
+                      <h5
+                        class="modal-title text-white font-weight-bold"
+                        id="videoModalLabel"
+                        style="font-size: 2rem"
+                      >
+                        TRAILER MULUD ADAT DESA BAYAN
+                      </h5>
+                      <button
+                        type="button"
+                        class="close text-white"
+                        data-dismiss="modal"
+                        aria-label="Close"
+                        style="font-size: 2rem"
+                      >
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body" style="padding: 0">
+                      <iframe
+                        width="100%"
+                        height="600"
+                        src="video/1.mp4"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen
+                        style="
+                          border-radius: 15px;
+                          box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
+                        "
+                      ></iframe>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Deskripsi Pasangan -->
+            <div class="text-center pt-5">
+              <h3 class="font-secondary mb-3" style="animation: fadeInUp 1.5s">
+                Deskripsi
+              </h3>
+              <p
+                class="lead mb-4 text-muted"
+                style="
+                  animation: fadeInUp 2s;
+                  max-width: 900px;
+                  margin: 0 auto;
+                  font-size: 1.2rem;
+                "
+              >
+                Perayaan Mulud Adat di Desa Bayan adalah wujud syukur masyarakat
+                atas kelahiran Nabi Muhammad SAW. Dihadiri oleh seluruh warga,
+                acara ini melibatkan doa bersama, pengajian, dan prosesi adat
+                yang menunjukkan rasa hormat terhadap Rasulullah.
+                <br /><br />
+                Mulud Adat juga menjadi momen untuk mempererat hubungan sosial
+                antarwarga Desa Bayan. Masyarakat saling berbagi hidangan khas
+                dan mengikuti pertunjukan seni tradisional, menguatkan nilai
+                kebersamaan dan gotong royong.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Custom Styles -->
+    <style>
+      /* Fade in effect for various sections */
+      @keyframes fadeIn {
+        0% {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Heartbeat animation for icon */
+      @keyframes heartBeat {
+        0% {
+          transform: scale(1);
+          opacity: 1;
+        }
+        50% {
+          transform: scale(1.1);
+          opacity: 0.7;
+        }
+        100% {
+          transform: scale(1);
+          opacity: 1;
+        }
+      }
+
+      /* Zoom in effect for image */
+      @keyframes zoomIn {
+        0% {
+          transform: scale(1.1);
+          opacity: 0;
+        }
+        100% {
+          transform: scale(1);
+          opacity: 1;
+        }
+      }
+
+      /* Bounce in effect for play button */
+      @keyframes bounceIn {
+        0% {
+          transform: translateY(-50%);
+          opacity: 0;
+        }
+        60% {
+          transform: translateY(0);
+          opacity: 1;
+        }
+        100% {
+          transform: translateY(-20%);
+        }
+      }
+
+      /* Fade in up effect for text */
+      @keyframes fadeInUp {
+        0% {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .about-video-container {
+        position: relative;
+        overflow: hidden;
+        border-radius: 15px;
+        background: linear-gradient(
+          to bottom,
+          rgba(0, 0, 0, 0.3),
+          rgba(0, 0, 0, 0.6)
+        );
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      }
+
+      .about-image-container {
+        position: relative;
+        width: 100%;
+        height: 500px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        border-radius: 15px;
+      }
+
+      .video-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .play-video-btn {
+        font-size: 70px;
+        color: white;
+        background-color: rgba(0, 0, 0, 0.5);
+        padding: 15px;
+        border-radius: 50%;
+        transition: transform 0.3s ease;
+      }
+
+      .play-video-btn:hover {
+        transform: scale(1.1);
+      }
+
+      .lead {
+        font-size: 1.25rem;
+        font-weight: 300;
+        text-align: center;
+        max-width: 900px;
+        margin: 0 auto;
+      }
+
+      /* Modal Styles */
+      .modal-dialog {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        max-width: 80%;
+        margin: 0 auto;
+      }
+
+      .modal-content {
+        border-radius: 25px;
+        background: linear-gradient(to right, #ffffff, #f2f2f2);
+        box-shadow: 0 8px 40px rgba(0, 0, 0, 0.4);
+      }
+
+      .modal-header {
+        background: linear-gradient(to right, #130028, #022157);
+        padding: 25px;
+        border-radius: 25px 25px 0 0;
+      }
+
+      .modal-title {
+        font-size: 2rem;
+        font-weight: 600;
+        color: white;
+      }
+
+      .close {
+        font-size: 2rem;
+        color: white;
+      }
+
+      .modal-body {
+        padding: 0;
+        background: #fff;
+        border-radius: 0 0 25px 25px;
+      }
+
+      iframe {
+        border-radius: 15px;
+        width: 100%;
+        height: 600px;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
+      }
+
+      /* Modal Close Button on Hover */
+      .close:hover {
+        color: #0e002d;
+        cursor: pointer;
+      }
+
+      /* Custom Scrollbar for modal */
+      .modal-body::-webkit-scrollbar {
+        width: 8px;
+      }
+
+      .modal-body::-webkit-scrollbar-thumb {
+        background-color: #0e002d;
+        border-radius: 4px;
+      }
+    </style>
+
+    <!-- jQuery Script to Reset Video When Modal is Closed -->
+    <script>
+      $("#videoModal").on("hidden.bs.modal", function () {
+        var iframe = $(this).find("iframe");
+        iframe.attr("src", iframe.attr("src")); // Stop video on modal close
+      });
+    </script>
+
+    <!-- About End -->
+    <!-- Story Start -->
+    <!-- Story Section -->
+    <div class="container-fluid py-5" id="story">
+      <div class="container pt-5 pb-3">
+        <div class="section-title position-relative text-center">
+          <h6
+            class="text-uppercase text-primary mb-3"
+            style="letter-spacing: 3px"
+          >
+            Mulud Adat
+          </h6>
+          <h1 class="font-secondary display-4">Susunan Acara</h1>
+          <i class="far fa-heart text-dark"></i>
+        </div>
+
+        <div class="container timeline position-relative p-0">
+          <!-- Zigzag Story Image and Video Sections -->
+          <div class="row fade-in-section">
+            <div class="col-md-6 text-center text-md-left">
+              <img
+                class="img-fluid ml-md-3 story-media"
+                src="img/4.jpg"
+                alt="Ngalu Gerantung"
+              />
+            </div>
+            <div class="col-md-6 text-center text-md-right">
+              <div
+                class="h-100 d-flex flex-column justify-content-center bg-overlay p-4 mr-md-3 fade-in"
+              >
+                <h4 class="mb-2">Ngalu Gerantung</h4>
+                <p class="text-uppercase mb-2">01 Januari 2052</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- More story sections with zigzag pattern -->
+          <div class="row fade-in-section">
+            <div class="col-md-6 text-center text-md-left">
+              <video
+                class="img-fluid ml-md-3 story-media"
+                src="video/2.mp4"
+                controls
+                alt="Penumbuk Padi"
+              ></video>
+            </div>
+            <div class="col-md-6 text-center text-md-right">
+              <div
+                class="h-100 d-flex flex-column justify-content-center bg-overlay p-4 mr-md-3 fade-in"
+              >
+                <h4 class="mb-2">Penumbuk Padi</h4>
+                <p class="text-uppercase mb-2">01 Januari 2050</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="row fade-in-section">
+            <div class="col-md-6 text-center text-md-left">
+              <img
+                class="img-fluid ml-md-3 story-media"
+                src="img/5.jpg"
+                alt="Nasi Ancak"
+              />
+            </div>
+            <div class="col-md-6 text-center text-md-right">
+              <div
+                class="h-100 d-flex flex-column justify-content-center bg-overlay p-4 mr-md-3 fade-in"
+              >
+                <h4 class="mb-2">Nasi Ancak</h4>
+                <p class="text-uppercase mb-2">01 Januari 2052</p>
+              </div>
+            </div>
+          </div>
+          <div class="row fade-in-section">
+            <div class="col-md-6 text-center text-md-left">
+              <video
+                class="img-fluid ml-md-3 story-media"
+                src="video/3.mp4"
+                controls
+                alt="Praja Mulut"
+              ></video>
+            </div>
+            <div class="col-md-6 text-center text-md-right">
+              <div
+                class="h-100 d-flex flex-column justify-content-center bg-overlay p-4 mr-md-3 fade-in"
+              >
+                <h4 class="mb-2">Praja Mulut</h4>
+                <p class="text-uppercase mb-2">01 Januari 2050</p>
+              </div>
+            </div>
+          </div>
+          <div class="row fade-in-section">
+            <div class="col-md-6 text-center text-md-left">
+              <img
+                class="img-fluid ml-md-3 story-media"
+                src="img/6.jpg"
+                alt="Bisok Menik"
+              />
+            </div>
+            <div class="col-md-6 text-center text-md-right">
+              <div
+                class="h-100 d-flex flex-column justify-content-center bg-overlay p-4 mr-md-3 fade-in"
+              >
+                <h4 class="mb-2">Bisok Menik</h4>
+                <p class="text-uppercase mb-2">01 Januari 2052</p>
+              </div>
+            </div>
+          </div>
+          <div class="row fade-in-section">
+            <div class="col-md-6 text-center text-md-left">
+              <img
+                class="img-fluid ml-md-3 story-media"
+                src="img/7.jpg"
+                alt="Presean"
+              />
+            </div>
+            <div class="col-md-6 text-center text-md-right">
+              <div
+                class="h-100 d-flex flex-column justify-content-center bg-overlay p-4 mr-md-3 fade-in"
+              >
+                <h4 class="mb-2">Presean</h4>
+                <p class="text-uppercase mb-2">01 Januari 2052</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Lightbox Modal -->
+    <div id="lightboxModal" class="lightbox-modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <div class="modal-body">
+          <h2 class="modal-title">SUSUNAN ACARA</h2>
+          <img
+            class="lightbox-content"
+            id="lightboxImg"
+            style="display: none"
+          />
+          <video
+            class="lightbox-content"
+            id="lightboxVideo"
+            controls
+            style="display: none"
+          ></video>
+          <div class="caption">
+            <p class="description">Rangkaian Acara Mulud Adat Bayan</p>
+            <p class="name"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <style>
+      /* General Styling */
+      #story {
+        background: linear-gradient(45deg, #f3f4f7, #b0e0e6);
+        padding: 50px 0;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      }
+
+      .img-fluid {
+        max-width: 100%;
+        height: auto;
+        border-radius: 15px;
+        transition: transform 0.3s ease-in-out;
+      }
+
+      .img-fluid:hover {
+        transform: scale(1.1);
+        cursor: pointer;
+      }
+
+      .lightbox-modal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.8);
+        overflow: auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .modal-content {
+        position: relative;
+        width: 80%;
+        height: 70%;
+        text-align: center;
+        animation: fadeIn 0.6s ease-in-out;
+        background-color: transparent;
+      }
+
+      .modal-body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+      }
+
+      .lightbox-content {
+        max-width: 90%;
+        max-height: 60vh;
+        display: block;
+        margin: 20px 0;
+        transition: transform 0.3s ease;
+        border-radius: 10px;
+      }
+
+      .modal-title {
+        color: #070134;
+        font-size: 2em;
+        margin-bottom: 10px;
+        animation: fadeInTitle 0.6s ease-out;
+      }
+
+      .caption {
+        text-align: center;
+        color: #070134;
+        font-size: 18px;
+        padding: 10px;
+      }
+
+      .description {
+        font-size: 16px;
+        margin-bottom: 5px;
+      }
+
+      .name {
+        font-weight: bold;
+        font-size: 18px;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      @keyframes fadeInTitle {
+        from {
+          opacity: 0;
+          transform: translateY(-20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .story-media {
+        transition: transform 0.3s ease;
+      }
+
+      .fade-in-section {
+        opacity: 0;
+        animation: fadeIn 1s forwards;
+      }
+
+      .row {
+        margin-bottom: 40px;
+      }
+
+      .row:nth-child(odd) .story-media {
+        margin-left: 0;
+        margin-right: 15px;
+      }
+
+      .row:nth-child(even) .story-media {
+        margin-left: 15px;
+        margin-right: 0;
+      }
+    </style>
+    <script>
+      // Select elements from the DOM
+      const modal = document.getElementById("lightboxModal");
+      const modalImg = document.getElementById("lightboxImg");
+      const modalVideo = document.getElementById("lightboxVideo");
+      const captionText = document.querySelector(".caption .description");
+      const nameText = document.querySelector(".caption .name");
+      const mediaElements = document.querySelectorAll(".story-media");
+
+      // Function to display the lightbox modal with appropriate media
+      document.querySelectorAll(".story-media").forEach(function (media) {
+        media.addEventListener("click", function () {
+          modal.style.display = "flex";
+
+          if (this.tagName.toLowerCase() === "img") {
+            modalImg.src = this.src;
+            modalImg.style.display = "block";
+            modalVideo.style.display = "none";
+          } else if (this.tagName.toLowerCase() === "video") {
+            modalVideo.src = this.src;
+            modalVideo.style.display = "block";
+            modalImg.style.display = "none";
+          }
+
+          captionText.innerHTML =
+            this.alt || "Rangkaian Acara Mulud Adat Bayan";
+          nameText.innerHTML = this.alt || "Rangkaian Acara Mulud Adat Bayan";
+        });
+      });
+
+      // Reset media sources when the modal is closed
+      function resetMediaSources() {
+        modalImg.src = "";
+        modalVideo.src = "";
+      }
+
+      // Close the modal when clicking on the close button (×)
+      document.querySelector(".close").onclick = function () {
+        modal.style.display = "none";
+        modalVideo.pause(); // Pause video playback when modal is closed
+        resetMediaSources();
+      };
+
+      // Close the modal when clicking outside of the modal content
+      window.addEventListener("click", function (event) {
+        if (event.target === modal) {
+          modal.style.display = "none";
+          modalVideo.pause();
+          resetMediaSources();
+        }
+      });
+
+      // Close the modal with Escape key
+      window.addEventListener("keydown", function (event) {
+        if (event.key === "Escape" && modal.style.display === "flex") {
+          modal.style.display = "none";
+          modalVideo.pause();
+          resetMediaSources();
+        }
+      });
+    </script>
+
+    <!-- Story End -->
+
+    <!-- Gallery Start -->
+    <div
+      class="container-fluid bg-gallery"
+      id="gallery"
+      style="
+        padding: 120px 0;
+        margin: 90px 0;
+        background-image: url('img/7.jpg');
+        background-size: cover;
+        background-position: center;
+      "
+    >
+      <div
+        class="section-title position-relative text-center"
+        style="margin-bottom: 120px"
+      >
+        <h6
+          class="text-uppercase text-primary mb-3"
+          style="letter-spacing: 3px"
+        >
+          Gallery
+        </h6>
+        <h1 class="font-secondary display-4 text-white">
+          Persatuan Dan Kesatuan Warga Bayan
+        </h1>
+        <i class="far fa-heart text-white"></i>
+      </div>
+      <div class="owl-carousel gallery-carousel">
+        <div class="gallery-item">
+          <img class="img-fluid w-100" src="img/gm1.jpeg" alt="" />
+          <a href="img/gm1.jpeg" data-lightbox="gallery">
+            <i class="fa fa-2x fa-plus text-white"></i>
+          </a>
+        </div>
+        <div class="gallery-item">
+          <img class="img-fluid w-100" src="img/gm2.JPG" alt="" />
+          <a href="img/gm2.jpeg" data-lightbox="gallery">
+            <i class="fa fa-2x fa-plus text-white"></i>
+          </a>
+        </div>
+        <div class="gallery-item">
+          <img class="img-fluid w-100" src="img/gm3.jpeg" alt="" />
+          <a href="img/gm3.jpeg" data-lightbox="gallery">
+            <i class="fa fa-2x fa-plus text-white"></i>
+          </a>
+        </div>
+        <div class="gallery-item">
+          <img class="img-fluid w-100" src="img/gm4.jpeg" alt="" />
+          <a href="img/gm4.jpeg" data-lightbox="gallery">
+            <i class="fa fa-2x fa-plus text-white"></i>
+          </a>
+        </div>
+        <div class="gallery-item">
+          <img class="img-fluid w-100" src="img/gm5.JPG" alt="" />
+          <a href="img/gm5.JPG" data-lightbox="gallery">
+            <i class="fa fa-2x fa-plus text-white"></i>
+          </a>
+        </div>
+        <div class="gallery-item">
+          <img class="img-fluid w-100" src="img/9.jpg" alt="" />
+          <a href="img/9.jpg" data-lightbox="gallery">
+            <i class="fa fa-2x fa-plus text-white"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Gallery End -->
+
+    <!-- Event Start -->
+    <div class="container-fluid py-5" id="event">
+      <div class="container py-5">
+        <div class="section-title position-relative text-center">
+          <h6
+            class="text-uppercase text-primary mb-3"
+            style="letter-spacing: 3px"
+          >
+            Acara Puncak
+          </h6>
+          <h1 class="font-secondary display-4">
+            Event Puncak Acara Mulud Adat
+          </h1>
+          <i class="far fa-heart text-dark"></i>
+        </div>
+        <div class="row justify-content-center">
+          <div class="col-md-6 text-center">
+            <h5 class="font-weight-normal text-muted mb-3 pb-3">
+              Adapun acara puncak yang akan kami lakukan dalam rangkaian
+              perayaan ini adalah presean, sebuah tradisi yang sarat makna yang
+              melibatkan pertunjukan seni bela diri, diikuti dengan rombongan
+              pembawa nasi ancak yang akan membawa hidangan istimewa sebagai
+              simbol syukur dan keberkahan. Acara ini akan diwarnai dengan
+              berbagai ritual dan hiburan yang menggambarkan kekayaan budaya dan
+              kebersamaan kami sebagai sebuah komunitas.
+            </h5>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 border-right border-primary">
+            <div class="text-center text-md-right mr-md-3 mb-4 mb-md-0">
+              <a
+                href="https://www.google.com/maps?q=Desa+Bayan,+Lombok+Utara,+NTB"
+                target="_blank"
+              >
+                <img
+                  class="img-fluid mb-4"
+                  src="img/7.jpg"
+                  alt="Wedding Image 1"
+                />
+              </a>
+              <h4 class="mb-3">PRESEAN</h4>
+              <p class="mb-2">
+                Bayan, Kabupaten Lombok Utara, Nusa tenggara barat
+              </p>
+              <p class="mb-0">8:00PM - 12:00PM</p>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="text-center text-md-left ml-md-3">
+              <a
+                href="https://www.google.com/maps?q=Desa+Bayan,+Lombok+Utara,+NTB"
+                target="_blank"
+              >
+                <img
+                  class="img-fluid mb-4"
+                  src="img/5.jpg"
+                  alt="Wedding Image 2"
+                />
+              </a>
+              <h4 class="mb-3">NASI ANCAK</h4>
+              <p class="mb-2">
+                Bayan, Kabupaten Lombok Utara, Nusa tenggara barat
+              </p>
+              <p class="mb-0">12:00AM - 15:00AM</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Countdown Timer Section Below the Event -->
+    <div class="container-fluid py-5" id="countdownSection">
+      <div class="container text-center">
+        <h2 class="font-secondary display-4 text-primary mb-5">
+          Hitung Mundur Acara Yang Akan Di Mulai
+        </h2>
+        <div id="countdown" class="countdown-timer">
+          <div class="time-box">
+            <span id="days"></span>
+            <p>Hari</p>
+          </div>
+          <div class="time-box">
+            <span id="hours"></span>
+            <p>Jam</p>
+          </div>
+          <div class="time-box">
+            <span id="minutes"></span>
+            <p>Menit</p>
+          </div>
+          <div class="time-box">
+            <span id="seconds"></span>
+            <p>Detik</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <style>
+      /* Countdown Timer Styles */
+      .countdown-timer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+        font-family: "Arial", sans-serif;
+      }
+
+      .time-box {
+        text-align: center;
+        background-color: rgba(0, 0, 0, 0.6);
+        padding: 20px;
+        border-radius: 10px;
+        color: #fff;
+        transition: all 0.3s ease;
+        font-size: 2rem;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      }
+
+      .time-box:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+      }
+
+      .time-box span {
+        display: block;
+        font-size: 3rem;
+        font-weight: bold;
+        animation: fadeIn 1.5s ease-in-out;
+      }
+
+      @keyframes fadeIn {
+        0% {
+          opacity: 0;
+          transform: scale(0.8);
+        }
+        100% {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+    </style>
+
+    <script>
+      // Set the date we're counting down to
+      const countdownDate = new Date("January 25, 2025 00:00:00").getTime();
+
+      // Update the countdown every 1 second
+      const x = setInterval(function () {
+        // Get the current date and time
+        const now = new Date().getTime();
+
+        // Find the distance between now and the countdown date
+        const distance = countdownDate - now;
+
+        // Calculate time left
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor(
+          (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+        );
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        // Display the result in the elements with the corresponding ids
+        document.getElementById("days").innerHTML = days;
+        document.getElementById("hours").innerHTML = hours;
+        document.getElementById("minutes").innerHTML = minutes;
+        document.getElementById("seconds").innerHTML = seconds;
+
+        // If the countdown is finished, display a message
+        if (distance < 0) {
+          clearInterval(x);
+          document.getElementById("countdown").innerHTML =
+            "The event has started!";
+        }
+      }, 1000);
+    </script>
+
+    <!-- Event End -->
+    <!-- Footer Start -->
+    <div
+      class="container-fluid bg-dark text-white py-5"
+      id="contact"
+      style="margin-top: 90px"
+    >
+      <div class="container text-center py-5">
+        <div class="section-title position-relative text-center mb-5">
+          <h1 class="font-secondary display-3 text-white">Terima Kasih</h1>
+          <p class="lead text-white">
+            Kami sangat berterima kasih atas kehadiran Anda dan sumbangan Anda.
+            Silakan isi data dan pilih jumlah sumbangan Anda di bawah ini.
+          </p>
+        </div>
+
+        <!-- Formulir Penerima Tamu -->
+        <div class="guest-form mb-5">
+          <h3 class="text-white mb-4">Isi Data Anda</h3>
+          <form id="guestForm" onsubmit="return false;">
+            <div class="form-row mb-3">
+              <div class="col">
+                <input
+                  type="text"
+                  class="form-control form-control-lg"
+                  id="guestName"
+                  placeholder="Nama Lengkap"
+                  required
+                />
+              </div>
+              <div class="col">
+                <input
+                  type="tel"
+                  class="form-control form-control-lg"
+                  id="guestPhone"
+                  placeholder="Nomor Telepon"
+                  required
+                />
+              </div>
+            </div>
+
+            <!-- Status Kehadiran -->
+            <div class="form-group mb-3">
+              <label class="text-white">Status Kehadiran</label>
+              <select
+                class="form-control form-control-lg"
+                id="attendanceStatus"
+                required
+              >
+                <option value="hadir">Hadir</option>
+                <option value="tidak_hadir">Tidak Hadir</option>
+              </select>
+            </div>
+
+            <!-- Sumbangan -->
+            <div class="form-group mb-3">
+              <input
+                type="text"
+                class="form-control form-control-lg"
+                id="donationAmount"
+                placeholder="Jumlah Sumbangan (IDR)"
+                required
+              />
+              <small class="form-text text-white"
+                >Minimal sumbangan adalah 100.000 IDR dan kelipatan
+                100.000</small
+              >
+            </div>
+
+            <!-- Tombol Kirim -->
+            <button class="btn btn-lg btn-primary" onclick="submitDonation()">
+              Kirim Sumbangan
+            </button>
+          </form>
+        </div>
+
+        <!-- Daftar Sumbangan -->
+        <div id="donationList" class="mt-5">
+          <h4 class="text-white">Daftar Sumbangan</h4>
+          <ul class="list-group" id="donationData">
+            <!-- Daftar sumbangan akan ditampilkan di sini -->
+          </ul>
+          <p id="totalDonation" class="text-white"></p>
+        </div>
+
+        <!-- Daftar Kehadiran -->
+        <div id="attendanceList" class="mt-5">
+          <h4 class="text-white">Daftar Kehadiran</h4>
+          <div class="filter mb-3">
+            <button class="btn btn-info" onclick="filterAttendance('hadir')">
+              Hadir
+            </button>
+            <button
+              class="btn btn-danger"
+              onclick="filterAttendance('tidak_hadir')"
+            >
+              Tidak Hadir
+            </button>
+            <button class="btn btn-secondary" onclick="resetFilter()">
+              Reset Filter
+            </button>
+          </div>
+          <ul class="list-group" id="attendanceData">
+            <!-- Daftar kehadiran akan ditampilkan di sini -->
+          </ul>
+        </div>
+
+        <!-- Animasi Amplop -->
+        <div id="envelope" class="envelope-animate" style="display: none">
+          <img
+            src="https://www.freepnglogos.com/uploads/envelope-png/envelope-png-envelope-icon-transparent-background-16.png"
+            alt="Envelope"
+          />
+        </div>
+      </div>
+    </div>
+
+    <!-- CSS -->
+    <style>
+      .guest-form input,
+      .guest-form button {
+        border-radius: 25px;
+      }
+
+      .envelope-animate {
+        position: fixed;
+        bottom: 10px;
+        right: 10px;
+        animation: flyEnvelope 2s ease-in-out forwards;
+        z-index: 9999;
+      }
+
+      @keyframes flyEnvelope {
+        0% {
+          transform: translateY(0);
+        }
+        100% {
+          transform: translateY(-400px) scale(0.5);
+        }
+      }
+
+      .list-group-item {
+        background-color: #343a40;
+        color: white;
+        border: none;
+        border-radius: 10px;
+        margin-bottom: 10px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        position: relative;
+        transition: transform 0.3s ease;
+      }
+
+      .list-group-item:hover {
+        transform: scale(1.05);
+      }
+
+      .delete-btn {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        cursor: pointer;
+        background: none;
+        border: none;
+        font-size: 20px;
+        color: #f44336;
+      }
+
+      .delete-btn:hover {
+        color: #ff5722;
+      }
+
+      .form-control:focus {
+        border-color: #f44336;
+      }
+
+      .filter button {
+        margin-right: 10px;
+      }
+
+      /* Gaya tombol Clear */
+      .clear-btn {
+        background-color: #f44336;
+        color: white;
+        border-radius: 10px;
+      }
+
+      .clear-btn:hover {
+        background-color: #ff5722;
+      }
+    </style>
+
+    <!-- JavaScript -->
+    <script>
+      // Format uang untuk sumbangan
+      function formatCurrency(amount) {
+        return amount.toLocaleString("id-ID", {
+          style: "currency",
+          currency: "IDR",
+        });
+      }
+
+      // Fungsi untuk validasi dan kirim sumbangan
+      function submitDonation() {
+        const name = document.getElementById("guestName").value;
+        const phone = document.getElementById("guestPhone").value;
+        const attendanceStatus =
+          document.getElementById("attendanceStatus").value;
+        let donationAmount = document
+          .getElementById("donationAmount")
+          .value.replace(/\./g, "");
+        donationAmount = parseInt(donationAmount);
+
+        // Validasi sumbangan
+        if (donationAmount % 100000 !== 0) {
+          alert("Jumlah sumbangan harus kelipatan 100.000 IDR");
+          return;
+        }
+
+        // Menyimpan data sumbangan ke LocalStorage
+        let donations = JSON.parse(localStorage.getItem("donations")) || [];
+        donations.push({ name, phone, amount: donationAmount });
+        localStorage.setItem("donations", JSON.stringify(donations));
+
+        // Menyimpan data kehadiran ke LocalStorage
+        let attendance = JSON.parse(localStorage.getItem("attendance")) || [];
+        attendance.push({ name, phone, status: attendanceStatus });
+        localStorage.setItem("attendance", JSON.stringify(attendance));
+
+        // Tampilkan daftar sumbangan dan kehadiran
+        displayDonations();
+        displayAttendance();
+
+        // Animasi amplop terbang
+        const envelope = document.getElementById("envelope");
+        envelope.style.display = "block";
+        setTimeout(() => {
+          envelope.style.display = "none";
+        }, 2000);
+
+        // Reset form
+        document.getElementById("guestForm").reset();
+      }
+
+      // Tampilkan daftar sumbangan
+      function displayDonations() {
+        const donationList = document.getElementById("donationData");
+        donationList.innerHTML = "";
+        const donations = JSON.parse(localStorage.getItem("donations")) || [];
+        let totalAmount = 0;
+        donations.forEach((donation, index) => {
+          const listItem = document.createElement("li");
+          listItem.classList.add("list-group-item");
+          listItem.innerHTML = `<span>${
+            donation.name
+          }</span> menyumbang sebesar ${formatCurrency(donation.amount)} 
+            <button class="delete-btn" onclick="deleteDonation(${index})"><i class="fas fa-trash-alt"></i></button>`;
+          donationList.appendChild(listItem);
+          totalAmount += donation.amount;
+        });
+
+        // Tampilkan total sumbangan
+        document.getElementById(
+          "totalDonation"
+        ).innerHTML = `Total Sumbangan: ${formatCurrency(totalAmount)}`;
+      }
+
+      // Menghapus sumbangan berdasarkan index
+      function deleteDonation(index) {
+        const donations = JSON.parse(localStorage.getItem("donations")) || [];
+        donations.splice(index, 1);
+        localStorage.setItem("donations", JSON.stringify(donations));
+        displayDonations();
+      }
+
+      // Tampilkan daftar kehadiran
+      function displayAttendance() {
+        const attendanceList = document.getElementById("attendanceData");
+        attendanceList.innerHTML = "";
+        const attendance = JSON.parse(localStorage.getItem("attendance")) || [];
+        attendance.forEach((attendee) => {
+          const listItem = document.createElement("li");
+          listItem.classList.add("list-group-item");
+          listItem.innerHTML = `${attendee.name} (${attendee.phone}) - ${
+            attendee.status === "hadir" ? "Hadir" : "Tidak Hadir"
+          }`;
+          attendanceList.appendChild(listItem);
+        });
+      }
+
+      // Filter kehadiran
+      function filterAttendance(status) {
+        const attendanceList = document.getElementById("attendanceData");
+        const attendance = JSON.parse(localStorage.getItem("attendance")) || [];
+        attendanceList.innerHTML = "";
+        const filtered = attendance.filter(
+          (attendee) => attendee.status === status
+        );
+        filtered.forEach((attendee) => {
+          const listItem = document.createElement("li");
+          listItem.classList.add("list-group-item");
+          listItem.innerHTML = `${attendee.name} (${attendee.phone}) - ${
+            attendee.status === "hadir" ? "Hadir" : "Tidak Hadir"
+          }`;
+          attendanceList.appendChild(listItem);
+        });
+      }
+
+      // Reset filter kehadiran
+      function resetFilter() {
+        displayAttendance();
+      }
+
+      // Load data saat halaman dimuat
+      window.onload = () => {
+        displayDonations();
+        displayAttendance();
+      };
+    </script>
+
+    <!-- Footer End -->
+
+    <!-- Scroll to Bottom -->
+    <i class="fa fa-2x fa-angle-down text-white scroll-to-bottom"></i>
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-lg btn-outline-primary btn-lg-square back-to-top"
+      ><i class="fa fa-angle-double-up"></i
+    ></a>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="lib/isotope/isotope.pkgd.min.js"></script>
+    <script src="lib/lightbox/js/lightbox.min.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="js/main.js"></script>
+  </body>
+</html>
